@@ -1,0 +1,43 @@
+.flag{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 160px;
+    border: 2px solid black;
+}
+
+.first-section{
+    background-color: red;
+    /* float: top; */
+    height: 40px;
+}
+
+.first-section>p{
+    text-align: center;
+    color: white;
+}
+.second-section{
+    background-color: blue;
+    /* float: top; */
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.third-section{
+    background-color: red;
+    /* float: bottom; */
+    height: 40px;
+}
+
+.circle{
+    width: 50px;
+    border-radius: 50%;
+
+    height: 50px;
+    background-color: white;
+}
+.circle>p{
+    text-align: center;;
+}
