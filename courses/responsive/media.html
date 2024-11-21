@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+
+    <style>
+        .container{
+            height: 1000px;
+            width: 1000px;
+            background-color: #000;
+        }
+        @media screen and (max-width: 600px) {
+            .container{
+
+                background-color: green;
+            }
+            
+        }
+        /* this is for between 400px and 800 px
+        min-width means: screen should be minimum that width to activate that css 
+        and max-width means that affects will continue up to that point */
+        @media screen and (min-width: 400px) and (max-width: 800px) {
+            .container{
+                background-color: red;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+</body>
+</html>
