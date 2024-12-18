@@ -1,0 +1,39 @@
+/* CSS for header */
+header {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align elements horizontally */
+    justify-content: start; /* Align elements at the top */
+    position: relative;
+    width: 100vw;
+    height: 85vh;
+    background-color: #e4f9f5;
+}
+
+.image {
+    mix-blend-mode: multiply; /* Blend image with the background */
+}
+
+.top-cloud {
+    width: 125px;
+    height: auto;
+    margin-bottom: 20px; /* Add spacing below the cloud */
+}
+
+.title-text {
+    font-size: 24px;
+    color: #40514e;
+    margin-bottom: 20px; /* Add spacing below the title */
+    text-align: center;
+}
+
+.bottom-cloud {
+    width: 125px;
+    height: auto;
+    margin-bottom: 20px; /* Add spacing below the second image */
+}
+
+.himal {
+    width: 300px;
+    height: auto;
+}

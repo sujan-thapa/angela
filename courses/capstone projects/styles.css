@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* css for header */
+header{
+    /* display: flex;
+    flex-direction: column; */
+    width: 100vw;
+    height: 85vh;
+    background-color: #e4f9f5;
+}
+.image{
+    mix-blend-mode: multiply;  /* this is used to blend the image with the background */
+
+}
+.cloud{
+    width: 125px;
+    height: auto;
+    top: 0;
+    left: 0;
+    color: #40514e;
+    /* Adjust percentages to hide unwanted parts */
+    /* clip-path: inset(10% 10% 10% 10%);  */
+    /* filter: blur(1px) brightness(1.2) contrast(1.5); */
+    /* background: url(../images/clouds.png) repeat-x; */
+    /* animation: moveClouds 20s linear infinite; */
+}
+
+.top-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    /* margin-top: 30px; */
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+}
+
+.himal{
+    position: relative;
+    width: 300px;
+    height: auto;
+    color: #40514e;
+
+
+}
+
+.footer{
+    height: 30px;
+    background-color: #333;
+    color: white;
+}

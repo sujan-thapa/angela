@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* css for header */
+header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    width: 100vw;
+    height: 85vh;
+    background-color: #e4f9f5;
+}
+
+.image {
+    mix-blend-mode: multiply;
+    /* this is used to blend the image with the background */
+
+}
+
+.top-cloud {
+    width: 125px;
+    height: auto;
+    position: relative;
+    left: 300px;
+}
+
+.title-text {
+    font-family: "Merriweather", serif;
+    text-align: center;
+    top: 115px;
+    width: 100%;
+}
+
+.title-text h1 {
+    font-size: 90px;
+    font-family: "Sacramento", cursive;
+    color: #66bfbf;
+}
+
+.title-text h2 {
+    color: #66bfbf;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5rem;
+    font-weight: normal;
+}
+.pro{
+    text-decoration: underline;
+}
+.title-image{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    position: relative;
+
+}
+.bottom-cloud {
+    width: 125px;
+    height: auto;
+    position: absolute;
+    top: 4px;
+    left: 300px;
+}
+
+.himal {
+    width: 400px;
+    height: auto;
+}
+
+
+/* css for main section */
+
+
+
+/* css for footer section */
+.footer {
+    height: 30px;
+    background-color: #333;
+    color: white;
+    position:absolute;
+   bottom:0;
+   width:100%;
+}
