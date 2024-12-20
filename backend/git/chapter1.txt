@@ -1,0 +1,4 @@
+Hi thapahshsh
+
+
+git rm --cached -r .  //reverse the staging status in git
