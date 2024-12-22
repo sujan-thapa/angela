@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 let data;
 
+// sjsjjss
+
 app.get("/", (req, res) => {
   res.render("index.ejs", {recipe: data});
   // res.render("index.ejs", {data});
