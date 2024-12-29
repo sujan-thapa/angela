@@ -5,7 +5,12 @@ const app = express();
 const port = 3000;
 const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 
+// to parse JSON body
+app.use(express.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
+
 
 //1. GET a random joke
 app.get("/random", (req, res) => {
@@ -46,19 +51,149 @@ app.get("/filter",(req,res)=>{
   res.json(filteredJokes);
 })
 
+
+
 //4. POST a new joke
+// let lastId = jokes.length > 0?jokes[jokes.length-1].id:0;
+app.post("/jokes", (req,res)=>{
+  const {text, type} = req.body
+  console.log(text)
+  console.log(type)
+
+  if (!text || !type) {
+    return res.status(400).json({error: "Please provide required information"})
+
+    
+  }
+
+  const newJoke = {
+    id: jokes.length+1,
+    jokeText: text,
+    jokeType: type
+  }
+  jokes.push(newJoke)
+  console.log(jokes.slice(-1))
+  res.json(newJoke)
+  // res.json(jokes[jokes.length-1])
+
+})
 
 //5. PUT a joke
+app.put("/jokes", (req,res)=>{ //for the query
+// app.put("/jokes/:id", (req,res)=>{ //for the params
+
+  const {text,type} = req.body
+  // const id = parseInt(req.params.id)
+  const id = parseInt(req.query.id)
+
+
+  const updatedJoke = {
+    id: id,
+    jokeText: text,
+    jokeType: type
+  }
+
+  console.log(updatedJoke)
+  const searchIndex = jokes.findIndex((joke)=>joke.id === id)
+
+  jokes[searchIndex] = updatedJoke
+  res.json(jokes[searchIndex]);
+
+
+
+})
 
 //6. PATCH a joke
 
+app.patch("/jokes/:id",(req,res)=>{
+  // const {text,type} = req.body
+
+  // const id = parseInt(req.params.id)
+
+  // if (!id) {
+  //   res.status(400).json({message: "ID is required"})
+    
+  // }
+
+  // const searchIndex = jokes.findIndex((joke)=> joke.id === id)
+
+  // if (searchIndex !== -1) {  // returns true if joke is found in array
+  //   // === -1 for false
+
+  //   if (text) jokes[searchIndex].jokeText = text
+  //   if (type) jokes[searchIndex].jokeType = type
+
+  //   res.json(jokes[searchIndex])
+  // }else{
+  //   res.status(404).json({error: "JOkes could not be found"})
+  // }
+
+  const {text, type} = req.body
+  const id = parseInt(req.params.id)
+
+  const existingJoke = jokes.find((joke)=> joke.id === id)
+  console.log(existingJoke)
+
+  const updatedJoke = {
+    id: id, 
+    jokeText: text || existingJoke.jokeText,
+    jokeType: type || existingJoke.jokeType
+  }
+
+  const searchIndex = jokes.findIndex((joke) => joke.id === id)
+
+  jokes[searchIndex] = updatedJoke
+
+  res.status(200).json({message: "Joke is updated succesfully", data: updatedJoke})
+
+})
+
 //7. DELETE Specific joke
+app.delete("/delete/:id",(req,res)=>{
+// app.delete("/delete",(req,res)=>{
+
+  const id = parseInt(req.params.id)
+  const searchIndex = jokes.findIndex((joke)=>joke.id === id)
+  console.log(searchIndex)
+
+
+  // findIndex() returns -1 if the element is not found. So, we should check if searchIndex !== -1 to verify that the item exists.
+
+  // array.splice(startIndex, deleteCount)  // modifies the original array
+  // if(searchIndex){  //This is checking whether the searchIndex is truthy. However, findIndex() will return -1 if it doesn't find the element. Since -1 is a falsy value, the condition will incorrectly evaluate to false even if the element is not found.
+
+  if (searchIndex !== -1) {
+    jokes.splice(searchIndex,1)
+    res.status(200).json({message: "Succesfully deleted", remaining: jokes})
+  }else{
+    res.status(400).json({error: "Could not find the object"})
+  }
+  
+
+
+})
 
 //8. DELETE All jokes
+app.delete("/deletes/all", (req,res)=>{
+  // const userkey = req.query.key
 
-app.listen(port, () => {
-  console.log(`Successfully started server on http://localhost:${port}.`);
-});
+  // jokes.splice(0, jokes.length)
+  // res.status(200).json({message: "Succesfully deleted all jokes", remaining: jokes})
+
+
+  const userkey = req.query.key
+
+  // 4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT
+
+  if (userkey === masterKey) {
+    jokes = [];
+    res.status(200).json({ message: "Successfully deleted all jokes", remaining: jokes });
+  }else{
+    res.status(400).json({error:"You are not authorized to perform this action"})
+  }
+
+})
+
 
 var jokes = [
   {
@@ -632,3 +767,9 @@ var jokes = [
     jokeType: "Food",
   },
 ];
+
+app.listen(port, () => {
+  console.log(`Successfully started server on http://localhost:${port}.`);
+});
+
+
