@@ -64,21 +64,41 @@ app.get("/posts/:id", (req,res)=>{
 // })
 
 //CHALLENGE 3: POST a new post
-app.post("/posts/new", (req,res)=>{
-  const content = req.body
-  posts.push(content);
-  console.log(posts)
-  res.json(posts)
+app.post("/posts", (req,res)=>{
+  // const content = req.body
+  // posts.push(content);
+  // console.log(posts)
+  // res.json(posts)
+
+  const newId = lastId + 1;
+  const post = {
+    id: newId,
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    date: new Date()
+  };
+  lastId = newId;
+  posts.push(post)
+  res.status(201).json(post)
+
 })
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
-app.patch("/edit/:id", (req,res)=>{
+app.patch("/posts/:id", (req,res)=>{
   const id = parseInt(req.params.id)
   const updateContent = req.body 
 
-  const contentIndex = posts.findIndex((post)=>post.id===id)
+  // const contentIndex = posts.findIndex((post)=>post.id===id)
+  const post = posts.find((p)=>p.id===id)
+  if(!post) return res.status(404).json({message: "Post not found"})
 
-  posts[contentIndex] = updateContent
+
+  // posts[contentIndex] = updateContent
+  if(req.body.title) post.title = req.body.title;
+  if(req.body.content) post.content = req.body.content;
+  if(req.body.author) post.author = req.body.author;
+
   console.log(posts)
   res.json(posts)
 
@@ -86,13 +106,17 @@ app.patch("/edit/:id", (req,res)=>{
 })
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
-app.delete("/delete/:id", (req,res)=>{
+app.delete("/posts/:id", (req,res)=>{
   const id = parseInt(req.params.id)
+
+ 
 
   const content = posts.find((post)=>post.id===id);
   // console.log(content)
 
   const contentIndex = posts.findIndex((content)=>content.id === id);
+  if (!contentIndex) return res.status(404).json({message: "Post not found"})
+  
   // console.log(contentIndex)
 
   posts.splice(contentIndex,1); 
