@@ -63,7 +63,20 @@ app.post("/add", async (req, res) => {
 });
 
 app.post("/edit", async (req, res) => {
-  
+  const id = req.body.updatedItemId;
+  const updatedTitle = req.body.updatedItemTitle
+  try {
+    // await db.query("UPDATE items SET title = $1 WHERE id=$2",[updatedTitle, id]);
+    await db.query("UPDATE items SET titles = $1 WHERE id=$2",[updatedTitle, id]);
+
+    res.redirect("/");
+    
+  } catch (error) {
+    console.log(error)
+    res.redirect("/");
+  }
+
+
 });
 
 app.post("/delete", async (req, res) => {
