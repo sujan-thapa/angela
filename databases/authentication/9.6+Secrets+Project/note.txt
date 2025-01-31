@@ -1,0 +1,2 @@
+Use res.render() when you want to pass data and display it immediately in the same request.
+Use res.redirect() when you need to navigate to another route and should store data in session or database.

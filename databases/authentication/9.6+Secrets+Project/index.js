@@ -56,9 +56,22 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.get("/secrets", (req, res) => {
+app.get("/secrets", async (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("secrets.ejs");
+    // console.log(req.user.id);
+    try {
+      const result = await db.query("SELECT * FROM users WHERE email = $1",[req.user.email]);
+      console.log(result);
+      const secret = req.rows[0].secrets
+      if (secret) {
+        res.render("secrets.ejs", {secret: secret})
+      }else{
+        res.render("secrets.ejs", {secret: "You should submit a secret!"})
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    res.render("secrets.ejs", {secret: req.user.secrets});
 
     //TODO: Update this to pull in the user secret to render in secrets.ejs
   } else {
@@ -70,6 +83,7 @@ app.get("/secrets", (req, res) => {
 //Think about how the logic should work with authentication.
 app.get("/submit", async (req, res)=>{
   if (req.isAuthenticated()) {
+
     res.render("submit.ejs");
   }else{
     // redirect to the login if the user is not authenticated
@@ -99,13 +113,14 @@ app.post("/submit", async (req, res) => {
       //   { new: true }
       // );
       console.log(req.body.secret);
-      console.log(req.user);
+      // console.log(req.user);
 
       console.log(req.user.id);
-      // const updated User = await db.query("UPDATE users SET secret = $1 WHERE id = $2",
-      //   [req.body.secret, req.user.id])
+      const updatedUser = await db.query("UPDATE users SET secrets = $1 WHERE id = $2",
+        [req.body.secret, req.user.id])
       
-      res.redirect("/secrets");
+      res.render("secrets.ejs", {secret: req.body.secret});
+      // res.redirect("/secrets");
     } catch (err) {
       console.error(err);
       res.redirect("/submit");
