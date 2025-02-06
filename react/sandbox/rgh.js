@@ -1,8 +1,8 @@
-const date = new Date();
-const year = date.getFullYear();
-const time = date.getHours();
+// const date = new Date();
+// const year = date.getFullYear();
+// const time = date.getHours();
 
-const ampm = time >= 12 ? 'PM' : 'AM';
+// const ampm = time >= 12 ? 'PM' : 'AM';
 
 // const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: "numeric", hour12: true });
 // console.log(timeString)
@@ -32,3 +32,8 @@ const ampm = time >= 12 ? 'PM' : 'AM';
 // }
 // console.log(sujan)
 
+
+const a= [1,2,3,4,5]
+
+const b = a.map((x)=> x*2)
+console.log(b)
