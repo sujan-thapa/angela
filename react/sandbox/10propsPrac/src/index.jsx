@@ -1,5 +1,7 @@
 import React from "react";
-import {createRoot} from "react-dom/client";
+import { StrictMode } from 'react';
+
+import { createRoot } from "react-dom/client";
 import App from "./components/App";
 // import "../public/styles.css";
 
@@ -14,4 +16,8 @@ import App from "./components/App";
 //4. Import the contacts.js file to create card components.
 
 const root = createRoot(document.getElementById("root"))
-root.render(<App />)
+root.render(
+    <StrictMode>
+        <App />
+    </StrictMode>
+)
