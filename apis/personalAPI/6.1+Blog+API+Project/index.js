@@ -44,7 +44,7 @@ app.use(express.static('public'))
 //CHALLENGE 1: GET All posts
 app.get("/posts",(req,res)=>{
   // res.render("index.ejs",{posts: posts})
-  console.log(posts)
+  // console.log(posts)
   res.json(posts)
 })
 
