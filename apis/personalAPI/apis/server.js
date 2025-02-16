@@ -34,6 +34,22 @@ app.get("/new", (req, res)=>{
 
 // create new posts
 app.post("/api/posts", async (req, res)=>{
+    try {
+        const response = await axios.post(`${API_URL}/posts`, req.body)
+        // res.render("index",{posts: response.data});
+
+        
+        // console.log(response.data);
+        // res.redirect("/")
+    res.redirect("/");
+
+        
+    } catch (error) {
+        res.status(500).json({message:"Error posting new posts"})
+
+        
+    }
+
     
 })
 
