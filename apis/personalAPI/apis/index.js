@@ -47,6 +47,26 @@ app.get("/posts", (req, res) => {
   res.json(posts)
 })
 
+
+// get a specific post by id
+app.get("/posts/:id", (req, res)=>{
+  try {
+    const id = parseInt(req.params.id);
+
+    // console.log(id)
+    const content = posts.find((post)=>post.id === id)
+
+    // console.log(result)
+    const contentIndex = posts.findIndex((post)=>post.id === id)
+    console.log(contentIndex)
+    res.json(content)
+    
+  } catch (error) {
+    res.status(500).json({message: "Error fetching data"})
+    
+  }
+})
+
 // add new post
 app.post("/posts", (req, res) => {
   const newId = lastId + 1;
