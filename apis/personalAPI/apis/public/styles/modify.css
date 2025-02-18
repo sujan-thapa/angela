@@ -3,6 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
+#editForm{
+    background-color: rgb(134, 156, 135);
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    padding: 12px;
+    width: 30vw;
+    gap: 12px;
+    border-radius: 1%;
+
+}
 
 #newPostForm{
     /* border: 2px solid black; */

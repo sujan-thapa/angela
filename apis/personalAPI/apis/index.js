@@ -108,7 +108,10 @@ app.delete("/posts/:id", (req, res) => {
   // console.log(content)
 
   const contentIndex = posts.findIndex((content) => content.id === id);
-  if (!contentIndex) return res.status(404).json({ message: "Post not found" })
+  // if (!contentIndex) return res.status(404).json({ message: "Post not found" })
+  if (contentIndex === -1) return res.status(404).json({ message: "Post not found" })
+
+
 
   // console.log(contentIndex);
   posts.splice(contentIndex,1);
