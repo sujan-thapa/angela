@@ -22,25 +22,34 @@ function App4() {
         //     [name]: value // Update only the changed field
         // }));
 
-        setFullName(prevValue => {
-            if (name === "fname") {
-                return {
-                    firstName: value,
-                    lastName: prevValue.lastName
-                }
 
-            } else if (name === "lname") {
-                return {
-                    firstName: prevValue.firstName,
-                    lastName: value
-                }
-            }else if (name === 'email'){
-                return {
-                    firstName: prevValue.email,
-                    email: value
-                }
-            }
-        })
+        setFullName(prevValue => {
+            return {
+              ...prevValue,
+              [name]: value
+            };
+          });
+        
+
+        // setFullName(prevValue => {
+            // if (name === "fname") {
+            //     return {
+            //         firstName: value,
+            //         lastName: prevValue.lastName
+            //     }
+
+            // } else if (name === "lname") {
+            //     return {
+            //         firstName: prevValue.firstName,
+            //         lastName: value
+            //     }
+            // }else if (name === 'email'){
+            //     return {
+            //         firstName: prevValue.email,
+            //         email: value
+            //     }
+            // }
+        // })
 
 
         // setFullName(prevValue => {
@@ -73,14 +82,14 @@ function App4() {
             <p>{fullName.email}</p>
             <form>
                 <input
-                    name="fname"
+                    name="firstName"
                     onChange={updateName}
                     type="text"
                     placeholder="First Name"
                     value={fullName.firstName}
                 />
                 <input
-                    name="lname"
+                    name="lastName"
                     onChange={updateName}
                     type="text"
                     placeholder="Last Name"
